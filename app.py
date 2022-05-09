@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+import jwt
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root@localhost/curso'
@@ -25,6 +26,9 @@ class Usuario(db.Model):
         self.nombre = nombre
         self.password = password
         self.rol = rol
+        
+    def __repr__(self):
+        return '<Usuario %u>' % self.nombre
         
 db.create_all()
 
@@ -51,18 +55,39 @@ def registro():
 @app.route('/api/registro', methods=["POST"])
 def registroPost():
     nombre = request.values.get('nombre')
-    email = request.values.get('email')
+    emailRegistro = request.values.get('email')
     password = request.values.get('pass')
     password2 = request.values.get('pass2')
     rol = 'Empleado'
     
+    usuario = Usuario.query.filter_by(email=emailRegistro).first()
+    if usuario != None:
+        return "error"
+    
     if password == password2:
-        nuevo_usuario = Usuario(email,nombre,password,rol)
+        nuevo_usuario = Usuario(emailRegistro,nombre,password,rol)
         db.session.add(nuevo_usuario)
         db.session.commit()
-        return nuevo_usuario.password
+        return "exito"
     else:
         return 'error'
+    
+@app.route('/api/login', methods=['POST'])
+def loginPost():
+    
+    emailRegistro = request.values.get('email')
+    password = request.values.get('pass')
+    '''rol'''
+    
+    usuario = Usuario.query.filter_by(email=emailRegistro).first()
+    if usuario == None:
+        return "el usuario no existe"
+    
+    if password == usuario.password:
+        return render_template(index.html)
+    else:
+        return "datos invalidos"
+        
     
     
 
