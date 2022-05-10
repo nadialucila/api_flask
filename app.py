@@ -20,22 +20,22 @@ class Usuario(db.Model):
     nombre = db.Column(db.String(100))
     password = db.Column(db.String(100))
     rol = db.Column(db.String(50))
-    
+
     def __init__(self,email,nombre,password,rol):
         self.email = email
         self.nombre = nombre
         self.password = password
         self.rol = rol
-        
+
     def __repr__(self):
         return '<Usuario %u>' % self.nombre
-        
+
 db.create_all()
 
 class UsuarioSchema(ma.Schema):
     class Meta:
         fields = ('id','email','nombre','password','rol')
-        
+
 usuario_schema = UsuarioSchema()
 usuarios_schema = UsuarioSchema()
 
@@ -59,11 +59,11 @@ def registroPost():
     password = request.values.get('pass')
     password2 = request.values.get('pass2')
     rol = 'Empleado'
-    
+
     usuario = Usuario.query.filter_by(email=emailRegistro).first()
     if usuario != None:
         return "error"
-    
+
     if password == password2:
         nuevo_usuario = Usuario(emailRegistro,nombre,password,rol)
         db.session.add(nuevo_usuario)
@@ -72,24 +72,32 @@ def registroPost():
     else:
         return 'error'
     
+@app.route('/api/login', methods=["GET"])
+def get_login():
+    return render_template('page-login.html')
+
 @app.route('/api/login', methods=['POST'])
 def loginPost():
-    
+
     emailRegistro = request.values.get('email')
     password = request.values.get('pass')
     '''rol'''
+
+    usuario = db.engine.execute(f"select * from usuario where email='{emailRegistro}'")
     
-    usuario = Usuario.query.filter_by(email=emailRegistro).first()
     if usuario == None:
-        return "el usuario no existe"
+        return "vacio"
     
-    if password == usuario.password:
-        return render_template(index.html)
-    else:
-        return "datos invalidos"
-        
-    
-    
+    for fila in usuario:
+        emailExistente = fila['email']
+        if emailExistente == None:
+            return "el usuario no existe"
+        passwordExistente = fila['password']
+        if password == passwordExistente:
+            return render_template('index.html')
+        else:
+            return "datos invalidos"
+
 
 if __name__ == '__main__':
     app.run(debug=True)
