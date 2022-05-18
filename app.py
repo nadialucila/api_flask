@@ -86,11 +86,6 @@ def index():
     return {}
 
 
-@app.route("/registro", methods=['GET'])
-def registro():
-    return {}
-
-
 @app.route('/api/registro', methods=["POST"])
 def registroPost():
     nombre = request.values.get('nombre')
@@ -114,10 +109,6 @@ def registroPost():
     else:
         return 'error'
 
-
-@app.route('/login', methods=["GET"])
-def get_login():
-    return {}
 
 @app.route('/api/login', methods=['POST'])
 def loginPost():
@@ -153,13 +144,9 @@ def loginPost():
 
 @app.route('/api/alta_habitacion', methods=['POST'])
 def alta_habitacion():
-
-
-
     error = 'Hubo un error con el ingreso de datos. Por favor, intentelo nuevamente.'
 
     data = request.json
-    id_habitacion = data['id_habitacion']
     nro_habitacion = data['nro_habitacion']
     descripcion = data['descripcion_habitacion']
     precio_por_dia = data['precio_por_dia']
@@ -169,8 +156,11 @@ def alta_habitacion():
     if habitacion != None:
         return jsonify(error)
 
-    if contiene_letras(id_habitacion) or contiene_letras(nro_habitacion) or contiene_letras(precio_por_dia):
+    if contiene_letras(nro_habitacion) or contiene_letras(precio_por_dia):
         return jsonify(error)
+
+    if nro_habitacion.replace(" ","") == None or descripcion.replace(" ","") == None or precio_por_dia.replace(" ","") == None or estado.replace(" ","") == None:
+        return json.dumps("error", "Debes rellenar todos los campos de texto.")
 
     if not es_precio(precio_por_dia):
         return jsonify(error)
@@ -185,7 +175,49 @@ def alta_habitacion():
 
     return json.dumps({"ok":"Habitación creada con éxito."})
 
+@app.route('/api/empleado/editar', methods=['PUT'])
+def editar_habitacion():
+    data = request.json
+    nro_habitacion = data['nro_habitacion']
+    descripcion = data['descripcion_habitacion']
+    precio_por_dia = data['precio_por_dia']
+    id = data['id_habitacion']
 
+    habitacion = Habitacion.query.filter_by(id_habitacion=id).first()
+    if habitacion == None:
+        return json.dumps("error", "No se encontró la habitacion que desea editar. Por favor, intentelo nuevamente.")
+
+    if contiene_letras(nro_habitacion) or contiene_letras(precio_por_dia):
+        return json.dumps("error", "Los campos de texto numéricos no pueden contener letras.")
+
+    if nro_habitacion.replace(" ","") == None or descripcion.replace(" ","") == None or precio_por_dia.replace(" ","") == None:
+        return json.dumps({"error": "Debes rellenar todos los campos de texto."})
+
+    if not es_precio(precio_por_dia):
+        return json.dumps("error", "El precio no es válido. Recuerda usar solo números y punto para decimal.")
+
+    habitacion.nro_habitacion = nro_habitacion
+    habitacion.descripcion = descripcion
+    habitacion.precio_por_dia = precio_por_dia
+
+    db.session.commit()
+
+    return json.dumps({"exito": "Datos cambiados con éxito."})
+
+@app.route('/api/empleado/estado', methods=['PUT'])
+def cambiar_estado_habitacion():
+
+    data = request.json
+    id = data['id_habitacion']
+    habitacion = Habitacion.query.filter_by(id_habitacion=id).first()
+
+    if habitacion.estado == 'activo':
+        habitacion.estado = 'inactivo'
+    else:
+        habitacion.estado = 'activo'
+
+    db.session.commit()
+    return json.dumps({"exito":habitacion.estado})
 
 if __name__ == '__main__':
     app.run(debug=True)
