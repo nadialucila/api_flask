@@ -3,8 +3,6 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import jwt
-import utils
-
 from utils import contiene_caracteres_ilegales, contiene_letras, es_precio
 
 app = Flask(__name__)
@@ -79,11 +77,47 @@ usuarios_schema = UsuarioSchema()
     End clases y schemas
 '''
 
-@app.route("/")
+def authenticate(ruta):
+    def wrapper(*args, **kwargs):
+        try:
+            token = request.headers['Auth']
+            contenido = jwt.decode(token,jwt_secret,algorithms=["HS256"])
+            return ruta(*args, **kwargs)
+        except jwt.DecodeError:
+            return {"error": "Error al decodificar"}
+        except jwt.InvalidTokenError:
+            return {"error": "Token invalido"}
+        except KeyError:
+            return {"error": "Parece que está faltando la autenticación..."}
+
+    wrapper.__name__ = ruta.__name__
+    return wrapper
+
+def payload_data():
+    token = request.headers['Auth']
+    contenido = jwt.decode(token,jwt_secret,algorithms=["HS256"])
+    rol = contenido['rol']
+    nombre = contenido['nombre']
+    return {"rol":rol,
+            "nombre":nombre}
+
+
+
+'''
+'' Endpoints ''
+''
+'''
+@app.route("/inicio")
+@authenticate
 def index():
-    token = request.headers.get("Authorization")
-    h_decoded = jwt.decode(token,jwt_secret, algorithms=['HS256'])
-    return {}
+
+    datos_usuario = payload_data()
+    rol = datos_usuario['rol']
+
+    if rol == 'Empleado':
+        return json.dumps({"rol":rol})
+    else:
+        return json.dumps({"rol":'no empleado'})
 
 
 @app.route('/api/registro', methods=["POST"])
@@ -143,6 +177,7 @@ def loginPost():
 
 
 @app.route('/api/alta_habitacion', methods=['POST'])
+@authenticate
 def alta_habitacion():
     error = 'Hubo un error con el ingreso de datos. Por favor, intentelo nuevamente.'
 

@@ -15,7 +15,7 @@ def contiene_letras(numero):
         return False
 
 def es_precio(precio):
-    x = re.findall("[+/!#$%&\(=?¡*¨+´\}_\\\[:,;><|°¬~`^\)\]]", precio) 
+    x = re.findall("[+/!#$%&\(=?¡*¨+´\}_\\\[:,;><|°¬~`^\)\]]", precio)
     if x:
         return False
     else:
