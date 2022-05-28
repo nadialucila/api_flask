@@ -1,7 +1,7 @@
 import re
 
 def contiene_caracteres_ilegales(palabra):
-    x = re.findall("[+/!#$%&(=?¡*¨+´}[_-.:,;><|°¬~`^])]", palabra)
+    x = re.findall("[+/!#$%&(=?¡*¨+\\´\\\\[_\\-\\.\\:\\,;><|°¬~`^]\\)\\]", palabra)
     if x:
         return True
     else:
@@ -15,7 +15,7 @@ def contiene_letras(numero):
         return False
 
 def es_precio(precio):
-    x = re.findall("[+/!#$%&\(=?¡*¨+´\}_\\\[:,;><|°¬~`^\)\]]", precio)
+    x = re.findall("[+/!#$%&\(=?¡*¨+\´\}\_\\[:,;><|°¬~`^\)\]]", precio)
     if x:
         return False
     else:
