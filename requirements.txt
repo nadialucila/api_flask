@@ -1,0 +1,12 @@
+flask
+flask-marshmallow
+flask-mysqldb
+flask-sqlalchemy
+marshmallow
+marshmallow-sqlalchemy
+mysqlclient
+pyjwt
+pymysql
+requests
+sqlalchemy
+waitress
