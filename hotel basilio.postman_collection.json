@@ -1,0 +1,535 @@
+{
+	"info": {
+		"_postman_id": "c326829e-55ef-4d56-bbab-c5ec2f772b06",
+		"name": "hotel basilio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20616037"
+	},
+	"item": [
+		{
+			"name": "Registro",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Auth",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoibmFkaWEiLCJyb2wiOiJFbXBsZWFkbyIsImlkIjoxfQ.NkLxeA9VZ7tclGqO3D4I6THRc7EKgnGh7XZ5jj7yKvE",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\":\"nombre\",\r\n    \"pass\":\"pass\",\r\n    \"pass2\":\"pass\",\r\n    \"rol\":\"Empleado\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/registro",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"registro"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Auth",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoibmFkaWEiLCJyb2wiOiJFbXBsZWFkbyIsImlkIjoxfQ.NkLxeA9VZ7tclGqO3D4I6THRc7EKgnGh7XZ5jj7yKvE",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\":\"usuario\",\r\n    \"pass\":\"pass\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/login",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reservas (empleado)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Auth",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoibmFkaWEiLCJyb2wiOiJFbXBsZWFkbyIsImlkIjoxfQ.NkLxeA9VZ7tclGqO3D4I6THRc7EKgnGh7XZ5jj7yKvE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/empleado/reservas",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"empleado",
+						"reservas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cambiar estado (empleado)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Auth",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoibmFkaWEiLCJyb2wiOiJFbXBsZWFkbyIsImlkIjoxfQ.NkLxeA9VZ7tclGqO3D4I6THRc7EKgnGh7XZ5jj7yKvE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_habitacion\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/empleado/habitacion/estado",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"empleado",
+						"habitacion",
+						"estado"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar habitacion (empleado)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Auth",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoibmFkaWEiLCJyb2wiOiJFbXBsZWFkbyIsImlkIjoxfQ.NkLxeA9VZ7tclGqO3D4I6THRc7EKgnGh7XZ5jj7yKvE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nro_habitacion\": 1,\r\n    \"descripcion_habitacion\": \"descripcion editada\",\r\n    \"precio_por_dia\": 122.8,\r\n    \"id_habitacion\": 1\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/empleado/habitacion/editar",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"empleado",
+						"habitacion",
+						"editar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alta habitacion (empleado)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Auth",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoibmFkaWEiLCJyb2wiOiJFbXBsZWFkbyIsImlkIjoxfQ.NkLxeA9VZ7tclGqO3D4I6THRc7EKgnGh7XZ5jj7yKvE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nro_habitacion\": 1,\r\n    \"descripcion_habitacion\": \"descripcion\",\r\n    \"precio_por_dia\": 1234,\r\n    \"estado\": \"activo\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/empleado/habitacion/alta",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"empleado",
+						"habitacion",
+						"alta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listado habitaciones (empleado)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Auth",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoibmFkaWEiLCJyb2wiOiJFbXBsZWFkbyIsImlkIjoxfQ.NkLxeA9VZ7tclGqO3D4I6THRc7EKgnGh7XZ5jj7yKvE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/empleado/habitacion/listado",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"empleado",
+						"habitacion",
+						"listado"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver una habitación (empleado)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Auth",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoibmFkaWEiLCJyb2wiOiJFbXBsZWFkbyIsImlkIjoxfQ.NkLxeA9VZ7tclGqO3D4I6THRc7EKgnGh7XZ5jj7yKvE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/empleado/habitacion/1",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"empleado",
+						"habitacion",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reservar habitacion (cliente)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Auth",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoibmFkaWEyIiwicm9sIjoiQ2xpZW50ZSIsImlkIjoyfQ.rbAJs1TzzmsD6QSL_kvTUETRERqRBuDaHBRu_dRnjHc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nro\":1,\r\n    \"f_inicio\":\"2022 7 12\",\r\n    \"f_fin\": \"2022 08 14\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/cliente/habitacion/reservar",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"cliente",
+						"habitacion",
+						"reservar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Habitaciones disponibles (cliente)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Auth",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoibmFkaWEyIiwicm9sIjoiQ2xpZW50ZSIsImlkIjoyfQ.rbAJs1TzzmsD6QSL_kvTUETRERqRBuDaHBRu_dRnjHc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fecha_inicio\":\"2022 5 7\",\r\n    \"fecha_fin\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/cliente/habitacion/fecha/disponibles",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"cliente",
+						"habitacion",
+						"fecha",
+						"disponibles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Habitaciones por precio menor al elegido (cliente)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Auth",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoibmFkaWEyIiwicm9sIjoiQ2xpZW50ZSIsImlkIjoyfQ.rbAJs1TzzmsD6QSL_kvTUETRERqRBuDaHBRu_dRnjHc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"precio\":1000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/cliente/habitacion/precio/all",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"cliente",
+						"habitacion",
+						"precio",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Habitaciones disponibles y ocupadas por fecha (cliente)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Auth",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoibmFkaWEyIiwicm9sIjoiQ2xpZW50ZSIsImlkIjoyfQ.rbAJs1TzzmsD6QSL_kvTUETRERqRBuDaHBRu_dRnjHc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fecha\":\"2022 01 2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/cliente/habitacion/fecha/all",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"cliente",
+						"habitacion",
+						"fecha",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reservas hechas (cliente)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Auth",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvIjoibmFkaWEyIiwicm9sIjoiQ2xpZW50ZSIsImlkIjoyfQ.rbAJs1TzzmsD6QSL_kvTUETRERqRBuDaHBRu_dRnjHc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/cliente/reservas",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"cliente",
+						"reservas"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
